@@ -1,0 +1,103 @@
+void main() {
+  var arreglo = ["Banana", 1096, 12.8, "c"];
+  for (int i = 0; i < arreglo.length; i++){
+    print(arreglo[i]);
+  }
+  print(arreglo[0].toString().replaceAll("n", "y"));
+  var str = "Mundo";
+  var image = {
+    "tags" : ["saturn"],
+    "url"  : ["//path/to/saturn.jpg"]
+  };
+  
+  if (image.isNotEmpty) {
+    print(image);
+  }
+  for (var obj in arreglo) {
+    print(obj.toString().toUpperCase());
+  }
+  print("_________________________");
+  
+  var num = 6;
+  print(fibonacci(num));
+  
+  for(int i = 0; i < 10; i++){
+    print("$i >> " + fibonacci(i).toString());
+  }
+  
+  var nave1 = NaveEspacial("Millenium Falcon", DateTime(1977, 1, 1));
+  nave1.describir();
+  
+  var nave2 = NaveEspacial.sinLanzar("The Kernel");
+  nave2.describir();
+  
+  var nave3 = Orbitante("Saeta Negra", DateTime(1980, 1, 1),10000);
+  nave3.describir();
+  
+  var nave4 = NaveTripulada("Fragata Imperial", DateTime(1990, 2, 2), 50000, 3);
+  nave4.describir();
+
+  var dibujo = ["|" , "/" , "-" , "\\" ];
+  for (int i = 0; i < 5; i++){
+    for (var obj in dibujo) {
+      print(obj);
+    }
+  }
+  
+}
+        
+int fibonacci (int n) {
+  if (n == 0 || n == 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+class NaveEspacial {
+  String nombre;
+  DateTime fechaLanzamiento;
+  
+  NaveEspacial (this.nombre, this.fechaLanzamiento) {
+  }
+  
+  NaveEspacial.sinLanzar(String nomb) : this(nomb, null);
+  
+  int get anioLanzamiento => fechaLanzamiento.year;
+  
+  void describir() {
+    print("Nave Espacial: $nombre");
+    if(fechaLanzamiento != null) {
+      int anio = DateTime.now().difference(fechaLanzamiento).inDays ~/365;
+      print("Lanzado: $anioLanzamiento (hace $anio años)");
+    } else { 
+      print("Sin lanzar");
+    }
+  }
+}
+
+class Orbitante extends NaveEspacial{
+  num altitud;
+  
+  Orbitante (String nombre, DateTime fechaLanzamiento, this.altitud)
+      : super(nombre, fechaLanzamiento);
+}
+
+class Tripulada {
+  int astronautas = 1;
+  void describirTripulacion() {
+    print ("Cantidad de astronautas: $astronautas");
+  }
+}
+
+class NaveTripulada extends Orbitante with Tripulada{
+  int lugares;
+  
+  NaveTripulada(String nombre, DateTime fechaLanzamiento, int altitud, this.lugares)
+    : super(nombre, fechaLanzamiento, altitud);
+  
+  int get cantLugares => this.lugares;
+  
+  void describir() {
+    super.describir();
+    print("Cantidad de astronautas: " + astronautas.toString());
+    print("Cantidad de lugares: " + lugares.toString());
+  }
+}
