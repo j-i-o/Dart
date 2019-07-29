@@ -1,20 +1,25 @@
 void main() {
   var catCerv = Categoria("Cervezas");
-  var item1 = Item("Patagonia", "Kune", 4, "Muy buena");
-  catCerv.agregarItem (item1);  
-  /*var lista = List();
-  lista.add(item1);
-  print(lista);*/
+  var item1 = Item("Patagonia", "Kune", 4, "Acida");
+  var item2 = Item("Corona", "", 3, "Aguada");
+  catCerv.agregarItem(item1);  
+  catCerv.agregarItem(item2);
+  catCerv.imprimirCategoria();
 }
 
 class Categoria{
   String nombre;
-  List items;
+  List items=[];
   
   Categoria (this.nombre);
   
   void agregarItem(Item itemA){
     items.add(itemA);
+  }
+  
+  void imprimirCategoria(){
+    print(this.nombre);
+    print(this.items);
   }
 }
 
@@ -28,57 +33,10 @@ class Item{
   
   @override
   String toString(){
-    print("Marca: $marca \n" +
+    return "Marca: $marca \n" +
     "Nombre: $nombre \n" +
     "Puntaje: $punt/5 \n" +
-    "Descripción: $desc");
-  }
-}ESTO RETORNA:
-Uncaught exception:
-C.JSNull_methods.add$1 is not a function
-
-void main() {
-  var catCerv = Categoria("Cervezas");
-  var item1 = Item("Patagonia", "Kune", 4, "Muy buena");
-  //catCerv.agregarItem (item1);  
-  var lista = List();
-  lista.add(item1);
-  print(lista);
-}
-
-class Categoria{
-  String nombre;
-  List items;
-  
-  Categoria (this.nombre);
-  
-  void agregarItem(Item itemA){
-    items.add(itemA);
+    "Descripción: $desc" +
+    "\n \n";
   }
 }
-
-class Item{
-  String marca;
-  String nombre;
-  int punt;
-  String desc;
-  
-  Item (this.marca, this.nombre, this.punt, this.desc);
-  
-  @override
-  String toString(){
-    print("Marca: $marca \n" +
-    "Nombre: $nombre \n" +
-    "Puntaje: $punt/5 \n" +
-    "Descripción: $desc");
-  }
-}
-
-ESTO RETORNA:
-
-Marca: Patagonia 
-Nombre: Kune 
-Puntaje: 4/5 
-Descripción: Muy buena
-Uncaught exception:
-Invalid argument: Instance of 'Item'
